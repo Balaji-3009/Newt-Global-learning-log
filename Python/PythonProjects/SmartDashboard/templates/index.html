@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="mb-4">Weather Dashboard</h2>
+
+<form method="POST" class="mb-4">
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <input
+                type="text"
+                name="city"
+                class="form-control"
+                placeholder="Enter City"
+            >
+        </div>
+
+        <div class="col-md-2">
+            <button class="btn btn-primary">
+                Search
+            </button>
+        </div>
+
+    </div>
+
+</form>
+
+<div class="card p-3 mb-4">
+
+    <h4>{{ weather.city }}</h4>
+
+    {% if weather.error %}
+
+        <div class="alert alert-danger">
+            {{ weather.error }}
+        </div>
+
+    {% else %}
+
+        <p>
+            Temperature:
+            {{ weather.temperature }} °C
+        </p>
+
+        <p>
+            Humidity:
+            {{ weather.humidity }}%
+        </p>
+
+        <p>
+            Description:
+            {{ weather.description }}
+        </p>
+
+    {% endif %}
+
+</div>
+
+<h2 class="mb-4">Latest News</h2>
+
+
+{% for article in articles %}
+
+<div class="card mb-3 p-3">
+
+    <h5>{{ article.title }}</h5>
+
+    <p>{{ article.description }}</p>
+
+    <span class="badge bg-primary">
+        {{ article.sentiment }}
+    </span>
+
+    <form action="/save" method="POST" class="mt-3">
+
+        <input
+            type="hidden"
+            name="title"
+            value="{{ article.title }}"
+        >
+
+        <input
+            type="hidden"
+            name="description"
+            value="{{ article.description }}"
+        >
+
+        <input
+            type="hidden"
+            name="sentiment"
+            value="{{ article.sentiment }}"
+        >
+
+        <button class="btn btn-success">
+            Save Favorite
+        </button>
+
+    </form>
+
+</div>
+
+{% endfor %}
+
+{% endblock %}

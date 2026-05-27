@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="mb-4">Saved Favorites</h2>
+
+{% for item in favorites %}
+
+<div class="card mb-3 p-3">
+
+    <h5>{{ item.title }}</h5>
+
+    <p>{{ item.description }}</p>
+
+    <span class="badge bg-success">
+        {{ item.sentiment }}
+    </span>
+
+</div>
+
+{% endfor %}
+
+{% endblock %}
