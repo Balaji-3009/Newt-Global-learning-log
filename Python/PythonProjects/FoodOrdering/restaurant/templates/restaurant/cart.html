@@ -1,0 +1,62 @@
+{% extends 'restaurant/base.html' %}
+
+{% block content %}
+
+<h2>Your Cart</h2>
+
+<table class="table">
+
+    <tr>
+        <th>Food</th>
+        <th>Quantity</th>
+        <th>Total</th>
+        <th>Action</th>
+    </tr>
+
+    {% for item in items %}
+
+    <tr>
+
+        <td>{{ item.food_item.name }}</td>
+
+        <td>
+
+            <a href="/decrease/{{ item.id }}/"
+            class="btn btn-sm btn-danger">
+            -
+            </a>
+
+            <span class="mx-2">
+                {{ item.quantity }}
+            </span>
+
+            <a href="/increase/{{ item.id }}/"
+            class="btn btn-sm btn-success">
+            +
+            </a>
+
+        </td>
+
+        <td>₹ {{ item.total_price }}</td>
+
+        <td>
+            <a href="/remove/{{ item.id }}/"
+               class="btn btn-danger">
+               Remove
+            </a>
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+<h4>Total: ₹ {{ cart.total_price }}</h4>
+
+<a href="/checkout/"
+   class="btn btn-success">
+   Proceed to Checkout
+</a>
+
+{% endblock %}

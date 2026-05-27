@@ -1,0 +1,42 @@
+{% extends 'restaurant/base.html' %}
+
+{% block content %}
+
+<h2 class="mb-4">Food Menu</h2>
+
+<div class="row">
+
+{% for food in foods %}
+
+<div class="col-md-4 mb-4">
+
+    <div class="card h-100">
+
+        <img src="{{ food.image.url }}"
+             class="card-img-top"
+             height="250">
+
+        <div class="card-body">
+
+            <h4>{{ food.name }}</h4>
+
+            <p>{{ food.description }}</p>
+
+            <h5>₹ {{ food.price }}</h5>
+
+            <a href="/add-to-cart/{{ food.id }}/"
+               class="btn btn-primary">
+               Add to Cart
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

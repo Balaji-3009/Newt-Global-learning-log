@@ -1,0 +1,70 @@
+{% extends 'restaurant/base.html' %}
+
+{% block content %}
+
+<h2>My Orders</h2>
+
+{% for order in orders %}
+
+<div class="card p-3 mb-4">
+
+    <h4>
+        Order #{{ order.id }}
+    </h4>
+
+    <p>
+        Status:
+        <span class="badge bg-primary">
+            {{ order.status }}
+        </span>
+    </p>
+
+    <p>
+        Date:
+        {{ order.created_at }}
+    </p>
+
+    <hr>
+
+    <h5>Items Ordered</h5>
+
+    <table class="table">
+
+        <tr>
+            <th>Food</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </tr>
+
+        {% for item in order.orderitem_set.all %}
+
+        <tr>
+
+            <td>
+                {{ item.food_item.name }}
+            </td>
+
+            <td>
+                {{ item.quantity }}
+            </td>
+
+            <td>
+                ₹ {{ item.price }}
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    <h5 class="text-end">
+        Total:
+        ₹ {{ order.total_amount }}
+    </h5>
+
+</div>
+
+{% endfor %}
+
+{% endblock %}
